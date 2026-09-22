@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LEAP University — Micro 101</title>
+<title>LEAP University — Micro 101 RTE</title>
 <style>
   :root{
     --maroon:#8B1E2D;
@@ -130,6 +130,29 @@
   .score-num{ font-family:Georgia,serif; font-size:40px; color:var(--maroon); font-weight:bold; }
   .score-label{ font-family:-apple-system,Segoe UI,Calibri,sans-serif; font-size:13px; color:var(--slate); }
 
+  /* Feedback survey */
+  .survey-meta{ width:100%; border-collapse:collapse; margin:20px 0 30px; font-family:-apple-system,Segoe UI,Calibri,sans-serif; font-size:14px; }
+  .survey-meta td{ border:1px solid var(--cream2); padding:10px 14px; }
+  .survey-meta td.label{ background:var(--cream); font-weight:700; width:36%; color:var(--ink); }
+  .survey-meta td.value{ color:var(--slate); }
+  .survey-q{ margin-bottom: 26px; }
+  .survey-q-text{ font-family:-apple-system,Segoe UI,Calibri,sans-serif; font-size:15.5px; font-weight:700; color:var(--ink); margin-bottom:10px; }
+  .survey-scale{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-family:-apple-system,Segoe UI,Calibri,sans-serif; font-size:13px; color:var(--slate); }
+  .survey-scale .end-label{ font-style:italic; min-width:96px; }
+  .survey-scale .end-label.right{ text-align:left; }
+  .survey-dot{
+    width:34px; height:34px; border-radius:50%; border:1.5px solid var(--cream2); background:var(--white);
+    display:flex; align-items:center; justify-content:center; font-size:14px; color:var(--slate); cursor:pointer;
+    font-family:-apple-system,Segoe UI,Calibri,sans-serif; transition: all .15s;
+  }
+  .survey-dot:hover{ border-color:var(--gold); }
+  .survey-dot.selected{ background:var(--maroon); border-color:var(--maroon); color:var(--white); font-weight:700; }
+  .survey-textarea{
+    width:100%; min-height:90px; border:1.5px solid var(--cream2); border-radius:6px; padding:12px 14px;
+    font-family:-apple-system,Segoe UI,Calibri,sans-serif; font-size:14.5px; color:var(--ink); resize:vertical;
+  }
+  .survey-textarea:focus{ outline:none; border-color:var(--gold); }
+
   .assess-note{ font-family:-apple-system,Segoe UI,Calibri,sans-serif; font-size:14px; color:var(--slate); background:var(--cream); border-radius:6px; padding:12px 16px; margin:4px 0 20px;}
 
   /* Illustrations (inline SVG, no external requests) */
@@ -144,8 +167,7 @@
 <div id="app"></div>
 
 <script>
-const COURSE = {"heroSvg": "<svg viewBox=\"0 0 600 300\" xmlns=\"http://www.w3.org/2000/svg\"><g transform=\"translate(300,150)\">\n    <circle cx=\"-180\" cy=\"-70\" r=\"70\" fill=\"#C5A059\" opacity=\"0.12\"/>\n    <circle cx=\"200\" cy=\"60\" r=\"90\" fill=\"#8B1E2D\" opacity=\"0.08\"/>\n    <circle cx=\"150\" cy=\"-90\" r=\"34\" fill=\"#C5A059\" opacity=\"0.18\"/>\n    \n<rect x=\"-30\" y=\"80\" width=\"140\" height=\"14\" rx=\"4\" fill=\"#475569\"/>\n<rect x=\"15\" y=\"20\" width=\"50\" height=\"14\" rx=\"4\" fill=\"#475569\"/>\n<rect x=\"30\" y=\"-60\" width=\"20\" height=\"90\" rx=\"6\" fill=\"#475569\"/>\n<path d=\"M 40 -60 C 90 -60 95 10 55 20\" fill=\"none\" stroke=\"#475569\" stroke-width=\"16\" stroke-linecap=\"round\"/>\n<rect x=\"20\" y=\"-95\" width=\"40\" height=\"40\" rx=\"8\" fill=\"#C5A059\"/>\n<circle cx=\"40\" cy=\"-95\" r=\"10\" fill=\"#F7F2EC\"/>\n<circle cx=\"-110\" cy=\"70\" r=\"46\" fill=\"#F7F2EC\" stroke=\"#475569\" stroke-width=\"6\"/>\n<circle cx=\"-110\" cy=\"70\" r=\"46\" fill=\"none\" stroke=\"#C5A059\" stroke-width=\"3\" opacity=\"0.7\"/>\n<circle cx=\"-122\" cy=\"60\" r=\"6\" fill=\"#8B1E2D\"/>\n<circle cx=\"-100\" cy=\"78\" r=\"5\" fill=\"#C5A059\"/>\n<circle cx=\"-115\" cy=\"85\" r=\"4\" fill=\"#2F6F4E\"/>\n<circle cx=\"-95\" cy=\"55\" r=\"4\" fill=\"#8B1E2D\" opacity=\"0.7\"/>\n</g></svg>", "courseCode": "Micro 101", "courseTitle": "Food Microbiology Foundations", "college": "COLLEGE OF FOOD SAFETY", "employeeType": "Salary (branches by product track)", "format": "Workday, self-paced", "prerequisites": "FS 102 complete", "estDuration": "12\u201315 min", "leadsTo": "FS 201 \u2014 Root Cause Analysis Fundamentals", "description": "Micro 101 gives salaried food safety and QA employees a working knowledge of the microorganisms that matter on the plant floor \u2014 the difference between pathogens and spoilage organisms, the major foodborne pathogens relevant to poultry, and how the plant tests for them.", "objectives": ["Describe basic bacterial characteristics (shape, gram stain, preferred environment).", "Distinguish a pathogen from a spoilage organism.", "Identify the major foodborne pathogens relevant to poultry products, their typical outbreak sources, and which ones carry legal adulterant status.", "Describe common food testing methods used at the plant (direct plating, lateral flow, ELISA, PCR).", "Demonstrate a basic coliform swabbing technique."], "modules": [{"title": "Bacteria Basics", "points": ["Bacteria are described by shape, gram stain, and preferred growth environment.", "These characteristics matter because they drive how we detect and control bacteria on the plant floor.", "Gram stain (positive vs. negative) affects which sanitizers and processes are most effective against a given organism."], "kcs": [{"question": "Which of these is a basic bacterial characteristic used to help identify and control it?", "options": ["Gram stain", "Favorite football team", "Shift schedule", "Employee ID number"], "correctIndex": 0, "explanation": " Gram stain, along with shape and preferred growth environment, is a basic bacterial characteristic that informs detection and control."}, {"question": "Preferred growth environment is a bacterial characteristic that helps...", "options": ["Predict where and how bacteria grow, informing controls", "Decide employee schedules", "Set product pricing", "Choose packaging colors"], "correctIndex": 0, "explanation": " Knowing an organism's preferred environment \u2014 temperature, moisture, oxygen level \u2014 helps target where controls matter most."}, {"question": "Bacterial shape is typically described using terms like...", "options": ["Rod (bacillus) or sphere (coccus)", "Square or triangle", "Large or small only", "Fast or slow"], "correctIndex": 0, "explanation": " Shape is one of the basic descriptors \u2014 rod-shaped (bacillus) and spherical (coccus) are common categories."}]}, {"title": "Pathogens vs. Spoilage Organisms", "points": ["Pathogens cause illness; spoilage organisms cause quality defects, not necessarily illness.", "Adulterants are organisms that render product legally unfit regardless of illness risk.", "A product can look, smell, and taste fine and still carry a pathogen \u2014 which is exactly why testing matters more than a visual check."], "kcs": [{"question": "What's the key difference between a pathogen and a spoilage organism?", "options": ["Pathogens cause illness; spoilage organisms cause quality defects", "They're the same thing", "Spoilage organisms are always more dangerous", "Pathogens only affect raw product"], "correctIndex": 0, "explanation": " Pathogens cause illness, while spoilage organisms cause quality defects rather than illness. Some organisms are also adulterants, which make product legally unfit regardless of illness risk."}, {"question": "An adulterant is best defined as...", "options": ["An organism that renders product legally unfit, regardless of illness risk", "Any organism found on product", "A synonym for pathogen", "A synonym for spoilage organism"], "correctIndex": 0, "explanation": " \"Adulterant\" is a specific legal status \u2014 not every pathogen carries it, and it doesn't require proven illness risk to apply."}, {"question": "Spoilage organisms primarily cause...", "options": ["Quality defects, not necessarily illness", "Serious illness in all cases", "No detectable effect on product", "Only cosmetic changes to packaging"], "correctIndex": 0, "explanation": " Spoilage organisms affect quality \u2014 taste, smell, texture \u2014 without necessarily posing an illness risk the way a pathogen does."}]}, {"title": "Major Foodborne Pathogens", "points": ["Key pathogens covered: Listeria monocytogenes, Salmonella, Campylobacter, E. coli O157:H7, Staphylococcus aureus, and Clostridium botulinum \u2014 each with its own susceptible populations and typical outbreak sources.", "Not every pathogen of concern is legally an \"adulterant.\" Listeria monocytogenes is an adulterant in ready-to-eat product, and E. coli O157:H7 is an adulterant in raw non-intact beef.", "Important distinction: Salmonella and Campylobacter are the pathogens of greatest public-health concern in raw poultry, but under current USDA-FSIS policy, Salmonella is NOT classified as an adulterant in raw poultry products.", "Slaughter/Raw track: extra emphasis on E. coli O157:H7 as a raw-product adulterant standard, and on Salmonella/Campylobacter monitoring and control given their significance to raw poultry."], "callout": "Common mix-up: \"adulterant\" and \"pathogen of concern\" aren't the same thing. Know which pathogens carry adulterant status for the products you work with \u2014 and which don't.", "kcs": [{"question": "Under current USDA-FSIS policy, is Salmonella classified as an adulterant in raw poultry?", "options": ["No \u2014 Salmonella is a major pathogen of concern in raw poultry, but it is not classified as an adulterant under current policy", "Yes, Salmonella is an adulterant in all raw poultry product", "Only in organic poultry", "Only during a recall"], "correctIndex": 0, "explanation": " Unlike E. coli O157:H7 in raw non-intact beef, Salmonella is not currently classified as an adulterant in raw poultry \u2014 even though it remains a top pathogen of concern and a focus of ongoing monitoring."}, {"question": "Which pathogen IS classified as an adulterant in raw non-intact beef?", "options": ["E. coli O157:H7", "Salmonella", "Campylobacter", "Staphylococcus aureus"], "correctIndex": 0, "explanation": " E. coli O157:H7 is legally an adulterant in raw non-intact beef \u2014 a stricter status than the \"pathogen of concern\" designation that applies to Salmonella in raw poultry."}]}, {"title": "Testing Methods & Hands-On Activity", "svg": "<svg viewBox=\"0 0 400 220\" xmlns=\"http://www.w3.org/2000/svg\"><g transform=\"translate(200,110)\"><circle cx=\"0\" cy=\"0\" r=\"88\" fill=\"#EDE4D8\" opacity=\"0.6\"/>\n<circle cx=\"-20\" cy=\"0\" r=\"70\" fill=\"#F7F2EC\" stroke=\"#475569\" stroke-width=\"6\"/>\n<circle cx=\"-20\" cy=\"0\" r=\"70\" fill=\"none\" stroke=\"#C5A059\" stroke-width=\"3\" opacity=\"0.6\"/>\n<circle cx=\"-45\" cy=\"-15\" r=\"8\" fill=\"#8B1E2D\"/>\n<circle cx=\"-10\" cy=\"10\" r=\"7\" fill=\"#C5A059\"/>\n<circle cx=\"-30\" cy=\"25\" r=\"6\" fill=\"#2F6F4E\"/>\n<circle cx=\"5\" cy=\"-20\" r=\"6\" fill=\"#8B1E2D\" opacity=\"0.7\"/>\n<circle cx=\"-55\" cy=\"15\" r=\"5\" fill=\"#C5A059\" opacity=\"0.8\"/>\n<circle cx=\"15\" cy=\"15\" r=\"5\" fill=\"#2F6F4E\" opacity=\"0.7\"/>\n<rect x=\"85\" y=\"-70\" width=\"26\" height=\"90\" rx=\"10\" fill=\"#F7F2EC\" stroke=\"#475569\" stroke-width=\"5\"/>\n<path d=\"M 87 10 a 11 11 0 0 0 22 0 Z\" fill=\"#C5A059\"/>\n<rect x=\"83\" y=\"-78\" width=\"30\" height=\"10\" rx=\"3\" fill=\"#475569\"/>\n</g></svg>", "points": ["The plant uses several testing methods depending on the need: direct plating, lateral flow, ELISA, PCR, and identification/sequencing.", "This module includes a hands-on coliform-swabbing activity to practice technique.", "Faster methods like lateral flow trade some sensitivity for speed; PCR and sequencing take longer but give more definitive answers."], "kcs": [{"question": "This module's hands-on activity has you practice which technique?", "options": ["Coliform swabbing", "Log-reduction math", "Thermometer calibration", "Audit checklist review"], "correctIndex": 0, "explanation": " The hands-on activity in Micro 101 is a coliform-swabbing exercise, giving you practice with a technique used in day-to-day testing."}, {"question": "Which testing method identifies organisms using genetic material?", "options": ["PCR", "Direct plating", "Lateral flow", "ELISA"], "correctIndex": 0, "explanation": " PCR identifies organisms based on their genetic material, offering a more definitive \u2014 if slower \u2014 answer than a rapid screening method like lateral flow."}]}], "assessmentBank": [{"question": "Which characteristic helps identify and control bacteria?", "options": ["Gram stain", "Favorite football team", "Shift schedule", "Employee ID number"], "correctIndex": 0}, {"question": "What's the key difference between a pathogen and a spoilage organism?", "options": ["Pathogens cause illness; spoilage organisms cause quality defects", "They're identical", "Spoilage organisms are always more dangerous", "Pathogens only affect raw product"], "correctIndex": 0}, {"question": "Under current USDA-FSIS policy, is Salmonella an adulterant in raw poultry?", "options": ["No \u2014 it's a major pathogen of concern, but it is not classified as an adulterant", "Yes, always", "Only in organic poultry", "Only during a recall"], "correctIndex": 0}, {"question": "Which pathogen IS classified as an adulterant in raw non-intact beef?", "options": ["E. coli O157:H7", "Salmonella", "Campylobacter", "Staphylococcus aureus"], "correctIndex": 0}, {"question": "In which type of product is Listeria monocytogenes considered an adulterant?", "options": ["Ready-to-eat product", "Raw poultry", "Raw non-intact beef", "Live animals"], "correctIndex": 0}, {"question": "Which pathogens are of greatest public-health concern in raw poultry?", "options": ["Salmonella and Campylobacter", "E. coli O157:H7 only", "C. botulinum only", "None \u2014 raw poultry has no pathogens of concern"], "correctIndex": 0}, {"question": "What is an adulterant?", "options": ["An organism that renders product legally unfit, independent of illness risk", "Any bacteria found on product", "A synonym for spoilage organism", "A cleaning chemical"], "correctIndex": 0}, {"question": "Which testing method uses antibody-based rapid detection?", "options": ["Lateral flow", "Direct plating", "PCR", "Sequencing"], "correctIndex": 0}, {"question": "Which of these describes a bacterium's shape?", "options": ["Rod (bacillus) or sphere (coccus)", "Square or triangle", "Large or small only", "Fast or slow"], "correctIndex": 0}, {"question": "Which testing method identifies organisms based on their genetic material?", "options": ["PCR", "Direct plating", "Lateral flow", "ELISA"], "correctIndex": 0}]};
-
+const COURSE = {"heroSvg": "<svg viewBox=\"0 0 600 300\" xmlns=\"http://www.w3.org/2000/svg\"><g transform=\"translate(300,150)\"><circle cx=\"-180\" cy=\"-70\" r=\"70\" fill=\"#C5A059\" opacity=\"0.12\"/>\n    <circle cx=\"200\" cy=\"60\" r=\"90\" fill=\"#8B1E2D\" opacity=\"0.08\"/>\n    <circle cx=\"150\" cy=\"-90\" r=\"34\" fill=\"#C5A059\" opacity=\"0.18\"/>\n<circle cx=\"0\" cy=\"0\" r=\"95\" fill=\"#EDE4D8\" stroke=\"#475569\" stroke-width=\"2\" opacity=\"0.5\"/>\n<circle cx=\"0\" cy=\"0\" r=\"70\" fill=\"#FFFFFF\" stroke=\"#475569\" stroke-width=\"2.5\"/>\n<circle cx=\"0\" cy=\"0\" r=\"45\" fill=\"#C5A059\" opacity=\"0.35\" stroke=\"#B5750C\" stroke-width=\"2.5\"/>\n<circle cx=\"0\" cy=\"0\" r=\"20\" fill=\"#8B1E2D\"/>\n<text x=\"0\" y=\"4\" text-anchor=\"middle\" font-family=\"-apple-system,Segoe UI,Calibri,sans-serif\" font-size=\"11\" fill=\"#FFFFFF\" font-weight=\"700\">Z1</text>\n</g></svg>", "courseCode": "Micro 101 \u2013 RTE", "courseTitle": "RTE Environmental Monitoring & Listeria Control", "college": "COLLEGE OF FOOD SAFETY", "employeeType": "Salary (RTE / prepared-product track)", "format": "Workday, self-paced", "prerequisites": "Micro 101 complete", "estDuration": "5\u20136 min", "leadsTo": "FS 201 \u2014 Root Cause Analysis Fundamentals", "description": "Micro 101 \u2013 RTE goes deeper on the microbiology that's unique to ready-to-eat product: why RTE carries a different risk profile than raw, why Listeria monocytogenes is uniquely hard to control, how environmental monitoring programs (EMPs) are zoned, and what happens when a swab comes back positive.", "objectives": ["Explain why ready-to-eat (RTE) product carries a different microbiological risk profile than raw product.", "Describe why Listeria monocytogenes is uniquely difficult to control in RTE environments.", "Identify the four zones of an environmental monitoring program (EMP) and what each one covers.", "Describe what typically happens when an environmental swab returns a positive result."], "modules": [{"title": "Why RTE Is Different", "points": ["RTE product is fully cooked and ready to eat, with no further kill step before it reaches the consumer \u2014 any contamination that happens after packaging goes straight to the customer.", "That's exactly why Listeria monocytogenes is legally an adulterant in RTE product specifically: it's the pathogen most associated with contamination that happens in the plant environment after the kill step, not from the raw ingredient itself.", "Raw product typically gets a cook step downstream, at a restaurant or in someone's kitchen. RTE doesn't \u2014 so the plant's own environment becomes the last line of defense against contamination."], "callout": "No kill step after RTE packaging means the plant environment IS the food safety control \u2014 that's the whole reason environmental monitoring exists.", "kcs": [{"question": "Why does RTE product require a different level of environmental control than raw product?", "options": ["There's no kill step after packaging, so plant-environment contamination goes straight to the consumer", "RTE product is inspected more often by USDA", "RTE product doesn't require any inspection", "Raw product is more dangerous, so RTE gets less scrutiny"], "correctIndex": 0, "explanation": " Because nothing cooks RTE product again before the consumer eats it, any contamination picked up in the plant environment after the kill step reaches the customer directly \u2014 that's the core reason RTE gets stricter environmental controls."}, {"question": "Why is Listeria monocytogenes specifically an adulterant in RTE product?", "options": ["It's the pathogen most associated with post-lethality environmental contamination", "It's the only pathogen that can survive cooking", "It only affects raw product, not RTE", "It's not actually a concern in RTE facilities"], "correctIndex": 0, "explanation": " Listeria monocytogenes is closely tied to contamination that happens in the plant environment after the kill step \u2014 exactly the risk that makes RTE product different from raw."}]}, {"title": "Listeria monocytogenes: The RTE Problem", "points": ["Listeria monocytogenes grows at refrigeration temperatures \u2014 unlike most foodborne pathogens, the cold doesn't stop it from multiplying.", "It can colonize drains, equipment crevices, and other hard-to-clean spots for months or even years if it isn't found and eliminated.", "It also tolerates common cleaning chemicals better than most pathogens, which is a big part of why it's so persistent once it establishes itself in a facility."], "svg": "<svg viewBox=\"0 0 400 220\" xmlns=\"http://www.w3.org/2000/svg\"><g transform=\"translate(200,110)\"><circle cx=\"0\" cy=\"0\" r=\"88\" fill=\"#EDE4D8\" opacity=\"0.6\"/>\n<circle cx=\"-40\" cy=\"0\" r=\"55\" fill=\"#FFFFFF\" stroke=\"#475569\" stroke-width=\"3\"/>\n<line x1=\"-40\" y1=\"-35\" x2=\"-40\" y2=\"35\" stroke=\"#475569\" stroke-width=\"3\"/>\n<line x1=\"-70\" y1=\"-17\" x2=\"-10\" y2=\"17\" stroke=\"#475569\" stroke-width=\"3\"/>\n<line x1=\"-70\" y1=\"17\" x2=\"-10\" y2=\"-17\" stroke=\"#475569\" stroke-width=\"3\"/>\n<circle cx=\"55\" cy=\"0\" r=\"42\" fill=\"#8B1E2D\" opacity=\"0.15\"/>\n<ellipse cx=\"55\" cy=\"0\" rx=\"26\" ry=\"14\" fill=\"#8B1E2D\"/>\n<circle cx=\"70\" cy=\"-3\" r=\"3\" fill=\"#FFFFFF\"/>\n</g></svg>", "kcs": [{"question": "What makes Listeria monocytogenes uniquely dangerous in a refrigerated RTE environment?", "options": ["It keeps growing at refrigeration temperatures, unlike most foodborne pathogens", "It can't survive outside the human body", "It's destroyed by normal refrigeration", "It only grows above room temperature"], "correctIndex": 0, "explanation": " Most foodborne pathogens slow down or stop growing in the cold \u2014 Listeria monocytogenes doesn't, which is exactly why refrigerated RTE product needs such careful environmental control."}, {"question": "Once established in a facility, how persistent can Listeria monocytogenes be?", "options": ["It can colonize drains and equipment crevices for months or years if not eliminated", "It naturally dies off within a day or two", "It only survives a single production shift", "It can't survive on equipment surfaces at all"], "correctIndex": 0, "explanation": " Listeria monocytogenes is known for long-term persistence in hard-to-clean spots like drains and equipment crevices \u2014 sometimes for months or years \u2014 which is why ongoing environmental monitoring matters."}]}, {"title": "The Four EMP Zones", "points": ["Zone 1: direct food-contact surfaces \u2014 conveyor belts, slicer blades, filler nozzles. This is the highest-scrutiny zone; a positive here can mean a product hold.", "Zone 2: non-food-contact surfaces immediately adjacent to product \u2014 equipment housings, frames, supports.", "Zone 3: non-food-contact surfaces elsewhere in the production area \u2014 floors, drains, walls.", "Zone 4: non-production areas \u2014 hallways, break rooms, loading docks.", "Many EMPs sample \u201coutside-in\u201d \u2014 watching Zones 2 through 4 closely to catch Listeria before it ever has a chance to reach Zone 1 and the product itself."], "svg": "<svg viewBox=\"0 0 400 220\" xmlns=\"http://www.w3.org/2000/svg\"><g transform=\"translate(200,110)\"><circle cx=\"0\" cy=\"0\" r=\"88\" fill=\"#EDE4D8\" opacity=\"0.6\"/>\n<circle cx=\"0\" cy=\"0\" r=\"90\" fill=\"#FFFFFF\" stroke=\"#475569\" stroke-width=\"2.5\"/>\n<text x=\"0\" y=\"-72\" text-anchor=\"middle\" font-family=\"-apple-system,Segoe UI,Calibri,sans-serif\" font-size=\"11\" fill=\"#475569\" font-weight=\"700\">ZONE 4</text>\n<circle cx=\"0\" cy=\"0\" r=\"65\" fill=\"#F7F2EC\" stroke=\"#475569\" stroke-width=\"2.5\"/>\n<text x=\"0\" y=\"-47\" text-anchor=\"middle\" font-family=\"-apple-system,Segoe UI,Calibri,sans-serif\" font-size=\"11\" fill=\"#475569\" font-weight=\"700\">ZONE 3</text>\n<circle cx=\"0\" cy=\"0\" r=\"42\" fill=\"#C5A059\" opacity=\"0.4\" stroke=\"#B5750C\" stroke-width=\"2.5\"/>\n<text x=\"0\" y=\"-24\" text-anchor=\"middle\" font-family=\"-apple-system,Segoe UI,Calibri,sans-serif\" font-size=\"10.5\" fill=\"#1A1A1A\" font-weight=\"700\">ZONE 2</text>\n<circle cx=\"0\" cy=\"0\" r=\"20\" fill=\"#8B1E2D\"/>\n<text x=\"0\" y=\"4\" text-anchor=\"middle\" font-family=\"-apple-system,Segoe UI,Calibri,sans-serif\" font-size=\"10.5\" fill=\"#FFFFFF\" font-weight=\"700\">ZONE 1</text>\n</g></svg>", "kcs": [{"question": "Which zone covers direct food-contact surfaces like conveyor belts and slicer blades?", "options": ["Zone 1", "Zone 2", "Zone 3", "Zone 4"], "correctIndex": 0, "explanation": " Zone 1 is direct food-contact surfaces \u2014 the highest-scrutiny zone, since anything found there has direct access to the product."}, {"question": "Which zone covers non-production areas like hallways and break rooms?", "options": ["Zone 4", "Zone 1", "Zone 2", "Zone 3"], "correctIndex": 0, "explanation": " Zone 4 covers non-production areas \u2014 furthest from the product, but still part of a complete environmental monitoring program."}, {"question": "Why do many EMPs sample \u201coutside-in\u201d (Zones 2\u20134 closely, working toward Zone 1)?", "options": ["To catch Listeria before it has a chance to reach the product in Zone 1", "Because Zone 1 doesn't need to be tested", "Because outside areas are more heavily regulated", "To reduce the total number of samples taken"], "correctIndex": 0, "explanation": " Watching Zones 2 through 4 closely is about early detection \u2014 catching a problem while it's still outside the product zone, before it can reach Zone 1."}, {"question": "What kind of surfaces does Zone 2 cover?", "options": ["Non-food-contact surfaces immediately adjacent to product, like equipment housings and frames", "Direct food-contact surfaces only", "Only the plant parking lot", "Only employee break rooms"], "correctIndex": 0, "explanation": " Zone 2 is non-food-contact, but close \u2014 equipment housings, frames, and supports right next to where product moves through."}]}, {"title": "When a Swab Comes Back Positive", "points": ["A positive environmental result triggers a root-cause investigation, not panic \u2014 the goal is finding where the organism came from and fixing it.", "Sampling intensity increases around a positive site until the plant confirms multiple consecutive negative results \u2014 one clean swab isn't enough to call it resolved.", "A positive on a food-contact surface (Zone 1) is treated far more seriously than a Zone 3 or 4 positive, since Zone 1 has direct access to the product."], "kcs": [{"question": "What happens after an environmental swab comes back positive?", "options": ["A root-cause investigation, with increased sampling until consecutive negatives are confirmed", "Nothing, unless it happens three times in a row", "The plant shuts down immediately, no investigation needed", "The result is noted but no action is required"], "correctIndex": 0, "explanation": " A positive triggers a root-cause investigation and increased sampling around that site \u2014 the plant needs multiple consecutive negative results before considering it resolved."}, {"question": "Why is a Zone 1 positive treated more seriously than a Zone 3 or 4 positive?", "options": ["Zone 1 has direct access to the product", "Zone 1 is the easiest zone to clean", "Zone 1 positives are actually less common", "There's no difference in how zones are treated"], "correctIndex": 0, "explanation": " Zone 1 is direct food-contact \u2014 a positive there means the organism has direct access to the product, which is far more serious than a positive further from the product in Zone 3 or 4."}]}], "assessmentBank": [{"question": "Why does RTE product need stricter environmental control than raw product?", "options": ["There's no kill step after packaging, so contamination reaches the consumer directly", "RTE product is inspected more often", "RTE product needs no inspection at all", "Raw product carries more risk, so RTE needs less control"], "correctIndex": 0}, {"question": "Why is Listeria monocytogenes specifically an adulterant in RTE product?", "options": ["It's the pathogen most linked to contamination picked up in the plant environment after the kill step", "It's the only pathogen that can survive cooking", "It only affects raw product", "It isn't actually a concern in RTE facilities"], "correctIndex": 0}, {"question": "What makes Listeria monocytogenes uniquely hard to control in a refrigerated environment?", "options": ["It keeps growing at refrigeration temperatures, unlike most pathogens", "It can't survive outside the human body", "Refrigeration destroys it quickly", "It only grows above room temperature"], "correctIndex": 0}, {"question": "How long can Listeria monocytogenes persist in a facility once established?", "options": ["Months or years, if not found and eliminated", "A single production shift at most", "It dies off within a day or two", "It can't survive on equipment surfaces"], "correctIndex": 0}, {"question": "Which zone covers direct food-contact surfaces?", "options": ["Zone 1", "Zone 2", "Zone 3", "Zone 4"], "correctIndex": 0}, {"question": "Which zone covers non-production areas like hallways and loading docks?", "options": ["Zone 4", "Zone 1", "Zone 2", "Zone 3"], "correctIndex": 0}, {"question": "What does Zone 2 typically cover?", "options": ["Non-food-contact surfaces immediately adjacent to product", "Direct food-contact surfaces", "Break rooms only", "The plant parking lot"], "correctIndex": 0}, {"question": "Why sample Zones 2 through 4 closely in an \u201coutside-in\u201d strategy?", "options": ["To catch contamination before it can reach the product in Zone 1", "Because Zone 1 doesn't need testing", "Because outer zones are more heavily regulated", "To reduce the total number of samples"], "correctIndex": 0}, {"question": "What happens after an environmental swab comes back positive?", "options": ["A root-cause investigation, with increased sampling until consecutive negatives are confirmed", "Nothing, unless it repeats three times", "Immediate plant shutdown with no investigation", "The result is noted with no required action"], "correctIndex": 0}, {"question": "Why is a Zone 1 positive treated more seriously than a Zone 3 or 4 positive?", "options": ["Zone 1 has direct access to the product", "Zone 1 is the easiest zone to clean", "Zone 1 positives are less common", "All zones are treated identically"], "correctIndex": 0}]}
 // ---------- utilities ----------
 function shuffle(arr){
   const a = arr.slice();
@@ -159,15 +181,20 @@ function shuffleOptions(q){
   const idx = shuffle(q.options.map((_,i)=>i));
   return { question:q.question, options: idx.map(i=>q.options[i]), correctIndex: idx.indexOf(q.correctIndex), explanation:q.explanation || '' };
 }
-function prepareBank(bank){
-  const order = shuffle(bank.map((_,i)=>i));
+function prepareBank(bank, sampleSize){
+  // Draws `sampleSize` questions at random from the pool (independently for pre/post),
+  // so a pool larger than the sample size yields genuinely different pre- vs post-assessments,
+  // not just a reshuffled copy of the same questions.
+  const n = sampleSize || bank.length;
+  const order = shuffle(bank.map((_,i)=>i)).slice(0, Math.min(n, bank.length));
   return order.map(i => shuffleOptions(bank[i]));
 }
 
+const ASSESSMENT_SAMPLE_SIZE = 10;
 // shuffle each module's KC options once at load
 COURSE.modules.forEach(m => { m.kcs = m.kcs.map(shuffleOptions); });
-const PRE_BANK = prepareBank(COURSE.assessmentBank);
-const POST_BANK = prepareBank(COURSE.assessmentBank);
+const PRE_BANK = prepareBank(COURSE.assessmentBank, ASSESSMENT_SAMPLE_SIZE);
+const POST_BANK = prepareBank(COURSE.assessmentBank, ASSESSMENT_SAMPLE_SIZE);
 const pretestAnswers = new Array(PRE_BANK.length).fill(null);
 const posttestAnswers = new Array(POST_BANK.length).fill(null);
 const kcState = {}; // "mi-ki" -> {selected, submitted, correctFirstTry}
@@ -185,10 +212,12 @@ function buildSlides(course){
   slides.push({type:'posttestIntro'});
   for(let i=0;i<POST_BANK.length;i++) slides.push({type:'posttest', qIndex:i});
   slides.push({type:'summary'});
+  slides.push({type:'survey'});
   return slides;
 }
 const SLIDES = buildSlides(COURSE);
 let current = 0;
+const surveyState = { overall:null, clear:null, confident:null, goodUse:null, suggestions:'', submitted:false };
 
 function el(tag, cls, html){
   const e = document.createElement(tag);
@@ -241,6 +270,7 @@ function render(){
   else if(slide.type === 'posttestIntro') renderAssessIntro(card, 'posttest');
   else if(slide.type === 'posttest') renderAssessQuestion(card, 'posttest', slide.qIndex);
   else if(slide.type === 'summary') renderSummary(card);
+  else if(slide.type === 'survey') renderSurvey(card);
   app.appendChild(card);
 }
 
@@ -287,7 +317,7 @@ function renderLanding(card){
   });
   card.appendChild(meta);
 
-  card.appendChild(el('div','assess-note', '\u{1F4CB} This course includes a 10-question pre-assessment, ' + totalKCCount() + ' embedded knowledge checks, and a 10-question post-assessment covering the same material, shuffled.'));
+  card.appendChild(el('div','assess-note', '\u{1F4CB} This course includes a ' + PRE_BANK.length + '-question pre-assessment, ' + totalKCCount() + ' embedded knowledge checks, and a ' + POST_BANK.length + '-question post-assessment covering the same material, shuffled.'));
 
   const objWrap = el('div');
   objWrap.appendChild(el('div','kicker', 'BY THE END OF THIS COURSE, YOU WILL BE ABLE TO:'));
@@ -464,20 +494,22 @@ function renderSummary(card){
 
   const scoreBox = el('div','score-box');
   const items = [
-    [preScore + '/' + PRE_BANK.length, 'Pre-assessment'],
-    [postScore + '/' + POST_BANK.length, 'Post-assessment'],
-    [kcCorrect + '/' + totalKC, 'Knowledge checks (first try)']
+    [preScore, PRE_BANK.length, 'Pre-assessment', false],
+    [postScore, POST_BANK.length, 'Post-assessment', delta > 0],
+    [kcCorrect, totalKC, 'Knowledge checks (first try)', false]
   ];
-  items.forEach(([num,label])=>{
+  items.forEach(([num,total,label,forceGreen])=>{
     const s = el('div');
-    s.appendChild(el('div','score-num', num));
+    const numEl = el('div','score-num', num + '/' + total);
+    if((num/total) >= 0.8 || forceGreen){ numEl.style.color = 'var(--green)'; }
+    s.appendChild(numEl);
     s.appendChild(el('div','score-label sans', label));
     scoreBox.appendChild(s);
   });
   card.appendChild(scoreBox);
 
   let deltaMsg;
-  if(delta > 0) deltaMsg = 'You improved by ' + delta + ' question' + (delta===1?'':'s') + ' from pre- to post-assessment.';
+  if(delta > 0) deltaMsg = 'Congratulations! You improved by ' + delta + ' question' + (delta===1?'':'s') + ' from pre- to post-assessment.';
   else if(delta === 0) deltaMsg = 'You matched your pre-assessment score — solid baseline retention.';
   else deltaMsg = "Your post-assessment score came in lower than your pre-assessment. Worth a second pass through this course before moving on.";
   card.appendChild(el('div','callout', deltaMsg));
@@ -493,14 +525,100 @@ function renderSummary(card){
   const back = el('button','btn btn-ghost sans','\u2190 Review');
   back.addEventListener('click', ()=>goTo(current-1));
   footWrap.appendChild(back);
-  const restart = el('button','btn btn-primary sans','Restart Course');
-  restart.addEventListener('click', ()=>{
-    Object.keys(kcState).forEach(k=>delete kcState[k]);
-    for(let i=0;i<pretestAnswers.length;i++) pretestAnswers[i]=null;
-    for(let i=0;i<posttestAnswers.length;i++) posttestAnswers[i]=null;
-    goTo(0);
+  const toSurvey = el('button','btn btn-primary sans','Continue to Feedback Survey \u2192');
+  toSurvey.addEventListener('click', ()=>goTo(current+1));
+  footWrap.appendChild(toSurvey);
+  card.appendChild(footWrap);
+}
+
+// ---------- FEEDBACK SURVEY ----------
+function ratingRow(question, key, lowLabel, highLabel){
+  const wrap = el('div','survey-q');
+  wrap.appendChild(el('div','survey-q-text', question));
+  const scale = el('div','survey-scale');
+  scale.appendChild(el('span','end-label', lowLabel));
+  for(let i=1;i<=5;i++){
+    const dot = el('button','survey-dot', String(i));
+    dot.type = 'button';
+    if(surveyState[key] === i) dot.classList.add('selected');
+    dot.addEventListener('click', ()=>{ surveyState[key] = i; render(); });
+    scale.appendChild(dot);
+  }
+  scale.appendChild(el('span','end-label right', highLabel));
+  wrap.appendChild(scale);
+  return wrap;
+}
+
+function renderSurvey(card){
+  if(surveyState.submitted){
+    card.appendChild(el('div','complete-icon', '\u2713'));
+    card.appendChild(el('div','kicker', 'FEEDBACK RECEIVED'));
+    card.appendChild(el('h1','slide-title', 'Thank you.'));
+    const body = el('div','body-text');
+    body.appendChild(el('p', null, "Your feedback on " + COURSE.courseTitle + " has been recorded. It helps LEAP University improve this course for the next person who takes it."));
+    card.appendChild(body);
+    const footWrap = el('div','card-footer');
+    const back = el('button','btn btn-ghost sans','\u2190 Back');
+    back.addEventListener('click', ()=>{ surveyState.submitted = false; render(); });
+    footWrap.appendChild(back);
+    const restart = el('button','btn btn-primary sans','Restart Course');
+    restart.addEventListener('click', ()=>{
+      Object.keys(kcState).forEach(k=>delete kcState[k]);
+      for(let i=0;i<pretestAnswers.length;i++) pretestAnswers[i]=null;
+      for(let i=0;i<posttestAnswers.length;i++) posttestAnswers[i]=null;
+      surveyState.overall = null; surveyState.clear = null; surveyState.confident = null;
+      surveyState.goodUse = null; surveyState.suggestions = ''; surveyState.submitted = false;
+      goTo(0);
+    });
+    footWrap.appendChild(restart);
+    card.appendChild(footWrap);
+    return;
+  }
+
+  card.appendChild(el('div','kicker', 'LAST STEP'));
+  card.appendChild(el('h1','slide-title', 'Course Feedback Survey'));
+
+  const table = document.createElement('table');
+  table.className = 'survey-meta';
+  const rows = [
+    ['Course / Session Completed', COURSE.courseCode + ' — ' + COURSE.courseTitle],
+    ['College', COURSE.college],
+    ['Employee Type', COURSE.employeeType],
+    ['Date', new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' })]
+  ];
+  rows.forEach(([label,val])=>{
+    const tr = document.createElement('tr');
+    const td1 = document.createElement('td'); td1.className='label'; td1.textContent = label;
+    const td2 = document.createElement('td'); td2.className='value'; td2.textContent = val;
+    tr.appendChild(td1); tr.appendChild(td2);
+    table.appendChild(tr);
   });
-  footWrap.appendChild(restart);
+  card.appendChild(table);
+
+  card.appendChild(ratingRow('1. Overall, how would you rate this training?', 'overall', 'Poor', 'Excellent'));
+  card.appendChild(ratingRow('2. The training content was clear and easy to understand.', 'clear', 'Strongly Disagree', 'Strongly Agree'));
+  card.appendChild(ratingRow('3. I feel confident applying what I learned to my job.', 'confident', 'Strongly Disagree', 'Strongly Agree'));
+  card.appendChild(ratingRow('4. This training was a good use of my time.', 'goodUse', 'Strongly Disagree', 'Strongly Agree'));
+
+  const q5 = el('div','survey-q');
+  q5.appendChild(el('div','survey-q-text', '5. What suggestions do you have to improve this course?'));
+  const textarea = document.createElement('textarea');
+  textarea.className = 'survey-textarea';
+  textarea.placeholder = 'Optional — share any thoughts here.';
+  textarea.value = surveyState.suggestions;
+  textarea.addEventListener('input', (e)=>{ surveyState.suggestions = e.target.value; });
+  q5.appendChild(textarea);
+  card.appendChild(q5);
+
+  const allRated = surveyState.overall && surveyState.clear && surveyState.confident && surveyState.goodUse;
+  const footWrap = el('div','card-footer');
+  const back = el('button','btn btn-ghost sans','\u2190 Back');
+  back.addEventListener('click', ()=>goTo(current-1));
+  footWrap.appendChild(back);
+  const submit = el('button','btn btn-primary sans','Submit Feedback');
+  submit.disabled = !allRated;
+  submit.addEventListener('click', ()=>{ surveyState.submitted = true; render(); });
+  footWrap.appendChild(submit);
   card.appendChild(footWrap);
 }
 
